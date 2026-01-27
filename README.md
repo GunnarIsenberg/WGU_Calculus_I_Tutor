@@ -1,11 +1,20 @@
-# WGU_Calculus_I_Tutor
-A Calc I tutor tailored for WGUs material.
+Calculus I Tutor for WGU
+
+A custom-tailored Calculus I chatbot designed specifically for Western Governors University (WGU) students.
 
 Project Overview
 
-This project is a web application deployed on Google Cloud that provides Western Governors University (Western Governors University) students with a custom-tailored Calculus I chatbot.
+This project is a web application deployed on Google Cloud that provides Western Governors University students with a custom-tailored Calculus I chatbot.
 
-The application delivers contextual explanations, guided problem-solving, and concept-level feedback aligned to the WGU Calculus I curriculum, with a focus on topics students historically struggle with (limits, derivatives, applications, and foundational intuition).
+The application delivers contextual explanations, guided problem-solving, and concept-level feedback aligned to the WGU Calculus I curriculum, with a focus on topics students historically struggle with:
+
+Limits
+
+Derivatives
+
+Applications of derivatives
+
+Foundational intuition
 
 The system is designed to be:
 
@@ -32,12 +41,12 @@ Persisting user-specific learning context and history
 Enforcing per-user data isolation and validation
 
 Major Components and Their Purpose
-1. Web Interface (Presentation Layer)
+Web Interface (Presentation Layer)
 
-Purpose:
+Purpose
 Provide students with a clean, approachable, distraction-free interface for interacting with the Calculus I chatbot.
 
-Responsibilities:
+Responsibilities
 
 Render the chatbot interface in the browser
 
@@ -49,12 +58,12 @@ Maintain conversational continuity during a session
 
 This layer is intentionally lightweight. It exists solely to support learning interactions, not to perform business logic.
 
-2. Application Server (Orchestration Layer)
+Application Server (Orchestration Layer)
 
-Purpose:
+Purpose
 Act as the central coordinator between the user interface, authentication system, AI model, and data storage.
 
-Responsibilities:
+Responsibilities
 
 Serve web pages and API endpoints
 
@@ -66,14 +75,14 @@ Apply user-specific context (progress, prior questions)
 
 Return structured responses to the frontend
 
-This layer defines the application’s behavior and rules but remains stateless between requests.
+This layer defines the application’s behavior and rules while remaining stateless between requests.
 
-3. Authentication & Identity Management
+Authentication & Identity Management
 
-Purpose:
-Ensure only authorized students can access the system, while minimizing friction and password management.
+Purpose
+Ensure only authorized students can access the system while minimizing friction and password management.
 
-Responsibilities:
+Responsibilities
 
 Authenticate users via institutional Microsoft accounts (Outlook)
 
@@ -83,14 +92,14 @@ Derive a stable, unique user identifier
 
 Gate access to all protected application features
 
-Authentication is handled through Microsoft’s identity platform (Microsoft Entra ID), allowing students to sign in using credentials they already trust.
+Authentication is handled through Microsoft Entra ID, allowing students to sign in using credentials they already trust.
 
-4. AI Reasoning Engine (Learning Core)
+AI Reasoning Engine (Learning Core)
 
-Purpose:
+Purpose
 Provide intelligent, curriculum-aware Calculus I assistance tailored to each student.
 
-Responsibilities:
+Responsibilities
 
 Interpret student questions and misconceptions
 
@@ -98,16 +107,16 @@ Generate step-by-step explanations and conceptual clarifications
 
 Adjust responses based on user history and prior misunderstandings
 
-Maintain instructional tone aligned with academic learning (not answer-dumping)
+Maintain an instructional, academic tone (not answer-dumping)
 
 This component transforms raw questions into pedagogically meaningful feedback.
 
-5. Persistence Layer (User Data & Context)
+Persistence Layer (User Data & Context)
 
-Purpose:
+Purpose
 Safely store and retrieve user-specific data required for personalization and continuity.
 
-Responsibilities:
+Responsibilities
 
 Store user profiles and metadata
 
@@ -119,12 +128,12 @@ Enforce strict per-user data ownership
 
 Data storage is fully managed and serverless, optimized for document-based, user-keyed access patterns.
 
-6. Cloud Infrastructure & Deployment
+Cloud Infrastructure & Deployment
 
-Purpose:
+Purpose
 Provide a secure, scalable, low-maintenance runtime environment.
 
-Responsibilities:
+Responsibilities
 
 Host the application as a stateless service
 
@@ -140,9 +149,9 @@ End-to-End User Experience (Conceptual)
 
 A WGU student visits the application
 
-They sign in using their institutional Outlook account
+The student signs in using their institutional Outlook account
 
-The system identifies them and loads their learning context
+The system identifies the student and loads their learning context
 
 The student asks a Calculus I question
 
@@ -160,58 +169,58 @@ The student iterates until understanding improves
 
 Design Philosophy
 
-Educational first – explanations over answers
+Educational first — explanations over answers
 
-Minimal surface area – fewer moving parts, fewer failures
+Minimal surface area — fewer moving parts, fewer failures
 
-Strong identity boundaries – user data is always isolated
+Strong identity boundaries — user data is always isolated
 
-Serverless where possible – low ops, high reliability
+Serverless where possible — low operational overhead and high reliability
 
 Leveraged Technologies
 Application Framework
 
 FastAPI
-FastAPI serves as the core application framework, responsible for request handling, routing, and orchestration between authentication, AI services, persistence, and the user interface. It enables a clean separation between presentation logic and application behavior while supporting modern web standards and scalable cloud deployment.
+Serves as the core application framework, responsible for request handling, routing, and orchestration between authentication, AI services, persistence, and the user interface.
 
 Templating & Presentation
 
 Jinja2
-Jinja2 is used for server-side rendering of HTML pages. It enables dynamic content generation while keeping the frontend intentionally simple and tightly integrated with the backend.
+Used for server-side rendering of HTML pages, enabling dynamic content generation while keeping the frontend simple and tightly integrated with the backend.
 
 Tailwind CSS with daisyUI
-Tailwind provides a utility-first styling system that allows the interface to be visually polished without custom CSS complexity. daisyUI adds a higher-level component abstraction, enabling consistent, accessible UI elements with minimal design effort.
+Tailwind provides a utility-first styling system that enables polished UI design without custom CSS complexity. daisyUI adds higher-level components for consistency and accessibility.
 
 Authentication & Identity
 
 Microsoft Entra ID (formerly Azure Active Directory)
-Microsoft Entra ID is used as the identity provider, allowing students to authenticate using their institutional Outlook accounts. This removes the need for custom credential management while ensuring strong, standards-based identity validation.
+Used as the identity provider to authenticate students via institutional Outlook accounts, eliminating the need for custom credential management.
 
 AI Model Platform
 
 Google Gemini
-Gemini powers the conversational reasoning engine. It is leveraged to deliver context-aware, instructional responses tailored to Calculus I concepts, enabling guided explanations, conceptual reinforcement, and adaptive feedback.
+Powers the conversational reasoning engine, delivering context-aware, instructional responses aligned to Calculus I concepts.
 
 Data Persistence
 
 Google Firestore (Native Mode)
-Firestore provides a fully managed, serverless document database used to store user profiles, conversation history, and learning context. Its document-oriented structure aligns naturally with per-user data isolation and simplifies authorization enforcement.
+A fully managed, serverless document database used to store user profiles, conversation history, and learning context.
 
 Cloud Platform & Infrastructure
 
 Google Cloud Platform (GCP)
-GCP provides the hosting and infrastructure foundation for the application, offering secure identity integration, managed runtime services, and seamless scaling.
+Provides the hosting and infrastructure foundation for the application.
 
 Cloud Run
-Cloud Run hosts the application as a stateless, containerized service. It enables automatic scaling, minimal operational overhead, and tight integration with other GCP services.
+Hosts the application as a stateless, containerized service with automatic scaling.
 
 Google Cloud IAM & Secret Manager
-IAM enforces least-privilege access between services, while Secret Manager securely stores sensitive configuration such as API credentials and authentication secrets.
+IAM enforces least-privilege access, while Secret Manager securely stores sensitive configuration and credentials.
 
 Browser-Side Logic
 
 Vanilla JavaScript (Minimal Use)
-A small amount of client-side JavaScript handles user interaction and asynchronous communication with the backend. This avoids frontend framework complexity while still enabling a responsive, conversational experience.
+Handles user interaction and asynchronous communication with the backend while avoiding frontend framework complexity.
 
 Summary
 
