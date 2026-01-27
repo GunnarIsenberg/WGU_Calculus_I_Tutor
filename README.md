@@ -1,5 +1,7 @@
 ================================================================================
+
 CALCULUS I TUTOR FOR WGU
+
 ================================================================================
 
 A custom-tailored Calculus I chatbot designed specifically for Western Governors
