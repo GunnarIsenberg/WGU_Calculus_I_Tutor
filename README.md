@@ -98,11 +98,6 @@ APPLICATION FRAMEWORK
 * FastAPI: Core framework responsible for request handling, routing, and 
   orchestration.
 
-PRESENTATION & TEMPLATING
-* Jinja2: Server-side rendering of HTML pages.
-* Tailwind CSS with daisyUI: Utility-first styling with high-level components 
-  for polished UI.
-
 AUTHENTICATION
 * Microsoft Entra ID (Azure AD): Handles student authentication via 
   institutional Outlook accounts.

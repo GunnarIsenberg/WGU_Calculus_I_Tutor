@@ -16,6 +16,6 @@ class UserQuestion(BaseModel):
     user_text: str
 
 @app.post("/sendmsg")
-async def sendMsg(user_question : UserQuestion):
+def sendMsg(user_question : UserQuestion):
     response = tutor.get_coaching(user_question.user_text)
     return{"reply" : response.text}

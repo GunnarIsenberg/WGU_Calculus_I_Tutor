@@ -11,7 +11,6 @@ class Tutor:
         self.location = "us-central1"
 
         self.client = genai.Client(
-            vertexai=True,
             project=self.project_id,
             location = self.location
         )
@@ -19,11 +18,7 @@ class Tutor:
         with open("resources/context/tutor_instructions.txt", "r") as f:
             self.instructions = f.read()
 
-        self.textbook_uri = "gs://wgucalc1tutorgunnarisenberg/Calculus_Volume_1_-_WEB_l4sAIKd.pdf"
-        self.textbook_part = types.Part.from_uri(
-            file_uri=self.textbook_uri,
-            mime_type="application/pdf"
-        )
+        self.textbook = self.client.files.upload(file="resources/context/Calculus_Volume_1.pdf")
 
     def get_coaching(self, user_prompt : str) -> str:
         config = types.GenerateContentConfig(
@@ -33,8 +28,9 @@ class Tutor:
 
         response = self.client.models.generate_content(
             model = "gemini-3-flash-preview",
-            contents = [self.textbook_part, user_prompt]#,
-            #config = config
+            contents = [self.textbook, user_prompt],
+            config = config
         )
         
-        return response.text
+        return response
+    
