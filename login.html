@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculus Tutor - Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific styles for the login layout */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 2rem;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .btn-msft {
+            background-color: #2f2f2f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 1rem;
+        }
+        .btn-guest {
+            background-color: transparent;
+            color: #555;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .btn-msft:hover { background-color: #000; }
+        .btn-guest:hover { background-color: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Welcome to Calculus Tutor</h2>
+        <p>Please sign in to save your chat history.</p>
+        
+        <button class="btn-msft" onclick="location.href='/auth/login'">
+            <img src="https://authjs.dev/img/providers/microsoft.svg" width="20" alt="MS Logo">
+            Sign in with Microsoft
+        </button>
+
+        <div style="margin: 15px 0; color: #aaa;">OR</div>
+
+        <button class="btn-guest" onclick="location.href='/auth/guest'">
+            Continue as Guest
+        </button>
+    </div>
+</body>
+</html>

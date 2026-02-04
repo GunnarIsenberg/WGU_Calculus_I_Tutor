@@ -2,4 +2,5 @@ fastapi[standard]
 google-genai
 sqlalchemy
 python-dotenv
-jinja2
+fastapi_sso.sso
+sqlalchemy
