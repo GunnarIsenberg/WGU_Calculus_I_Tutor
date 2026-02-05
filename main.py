@@ -1,15 +1,19 @@
 import os
 import uuid
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, Query, Request, Response
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi_sso.sso.microsoft import MicrosoftSSO
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from requests import Session
 from ai_engine import Tutor
 from database import User, get_db
 from fastapi.middleware.cors import CORSMiddleware
 
+load_dotenv()
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="."), name="static")
 
 sso = MicrosoftSSO(
     client_id=os.getenv("MS_CLIENT_ID"),
@@ -34,7 +38,7 @@ async def root():
     with open("login.html", "r") as f:
         return f.read()
     
-@app.get("auth/guest")
+@app.get("/auth/guest")
 async def guest_login(response:Response):
     guest_id = f"guest_{uuid.uuid4().hex[:8]}"
     res = RedirectResponse(url="/chat")
@@ -51,11 +55,20 @@ async def login_callback(request: Request, db: Session = Depends(get_db)):
     with sso:
         user_data = await sso.verify_and_process(request)
     
-    user = Query(User).filter(User.id == user_data.id).first()
+    user = db.query(User).filter(User.id == user_data.id).first()
     if not user:
         user = User(id=user_data.id, email=user_data.email, display_name=user_data.display_name)
         db.add(user)
         db.commit()
+    
+    res = RedirectResponse(url="/chat")
+    res.set_cookie(key="user_id", value=user_data.id)
+    return res
+
+@app.get("/chat", response_class=HTMLResponse)
+async def get_chat():
+    with open("index.html","r") as f:
+        return f.read()
 
 @app.post("/sendmsg")
 def sendMsg(user_question : UserQuestion):
